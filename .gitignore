@@ -3,3 +3,4 @@
 QtApp/QtApp/CMakeLists.txt.user
 /QtApp/build-QtApp-Desktop_Qt_6_5_3_MSVC2019_64bit-Release
 /.idea
+/Sensors_BLE_L476RG/STM32CubeIDE/Debug
