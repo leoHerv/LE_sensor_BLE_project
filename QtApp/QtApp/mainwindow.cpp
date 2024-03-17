@@ -6,7 +6,11 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui(new Ui::MainWindow),
     m_connectedPort(false),
     m_canRead(false),
-    m_consoleScrollBarCanMove(true)
+    m_consoleScrollBarCanMove(true),
+    m_time(0),
+    m_temperature(0.0),
+    m_humidity(0.0),
+    m_pressure(0.0)
 
 {
     m_ui->setupUi(this);
@@ -34,6 +38,60 @@ MainWindow::MainWindow(QWidget *parent)
     // Set the border color of the comboxBox in red.
     deconnectionDoneIndicator();
 
+    // Setup the plot.
+    m_dataTemperature   = QSharedPointer<QCPGraphDataContainer>(new QCPGraphDataContainer);
+    m_dataHumidity      = QSharedPointer<QCPGraphDataContainer>(new QCPGraphDataContainer);
+    m_dataPressure      = QSharedPointer<QCPGraphDataContainer>(new QCPGraphDataContainer);
+
+    QFont legendFont = font();
+    legendFont.setPointSize(10);
+
+    // Init plot for the Temperature.
+    m_ui->plotTemperatureWidget->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+    m_ui->plotTemperatureWidget->legend->setVisible(true);
+    m_ui->plotTemperatureWidget->legend->setFont(legendFont);
+    m_ui->plotTemperatureWidget->legend->setSelectedFont(legendFont);
+    m_ui->plotTemperatureWidget->legend->setSelectableParts(QCPLegend::spItems);
+    m_ui->plotTemperatureWidget->yAxis->setLabel("Température");
+    m_ui->plotTemperatureWidget->xAxis->setLabel("Temps");
+    m_ui->plotTemperatureWidget->clearGraphs();
+
+    m_ui->plotTemperatureWidget->addGraph();
+    m_ui->plotTemperatureWidget->graph()->setPen(QPen(Qt::black));
+    m_ui->plotTemperatureWidget->graph()->setData(m_dataTemperature);
+    m_ui->plotTemperatureWidget->graph()->setName("Temperature");
+
+    // Init plot for the Humidity.
+    m_ui->plotHumidityWidget->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+    m_ui->plotHumidityWidget->legend->setVisible(true);
+    m_ui->plotHumidityWidget->legend->setFont(legendFont);
+    m_ui->plotHumidityWidget->legend->setSelectedFont(legendFont);
+    m_ui->plotHumidityWidget->legend->setSelectableParts(QCPLegend::spItems);
+    m_ui->plotHumidityWidget->yAxis->setLabel("Humidité");
+    m_ui->plotHumidityWidget->xAxis->setLabel("Temps");
+    m_ui->plotHumidityWidget->clearGraphs();
+
+    m_ui->plotHumidityWidget->addGraph();
+    m_ui->plotHumidityWidget->graph()->setPen(QPen(Qt::red));
+    m_ui->plotHumidityWidget->graph()->setData(m_dataHumidity);
+    m_ui->plotHumidityWidget->graph()->setName("Humidité");
+
+    // Init plot for the Pressure.
+    m_ui->plotPressureWidget->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+    m_ui->plotPressureWidget->legend->setVisible(true);
+    m_ui->plotPressureWidget->legend->setFont(legendFont);
+    m_ui->plotPressureWidget->legend->setSelectedFont(legendFont);
+    m_ui->plotPressureWidget->legend->setSelectableParts(QCPLegend::spItems);
+    m_ui->plotPressureWidget->yAxis->setLabel("Pression");
+    m_ui->plotPressureWidget->xAxis->setLabel("Temps");
+    m_ui->plotPressureWidget->clearGraphs();
+
+    m_ui->plotPressureWidget->addGraph();
+    m_ui->plotPressureWidget->graph()->setPen(QPen(Qt::blue));
+    m_ui->plotPressureWidget->graph()->setData(m_dataPressure);
+    m_ui->plotPressureWidget->graph()->setName("Pression");
+
+
     // If the timer have finish then we update the ports.
     connect(m_SerialScanTimer, &QTimer::timeout,
             this, &MainWindow::updateSerialPorts);
@@ -54,6 +112,9 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete m_ui;
+    delete m_Serial;
+    delete m_SerialScanTimer;
+    delete m_DataScanTimer;
 }
 
 void MainWindow::updateSerialPorts()
@@ -134,22 +195,40 @@ void MainWindow::updateData()
                     QStringList temperature = l.split(':');
                     if(temperature.length() == 2 && !temperature[1].isEmpty()){
                         m_ui->temperatureDisplay->setText(temperature[1]);
+                        m_temperature = temperature[1].toFloat();
                     }
                 }
                 else if(l.startsWith("humidity :")){
                     QStringList humidity = l.split(':');
                     if(humidity.length() == 2 && !humidity[1].isEmpty()){
                         m_ui->humididyDisplay->setText(humidity[1]);
+                        m_humidity = humidity[1].toFloat();
                     }
                 }
                 else if(l.startsWith("pressure :")){
                     QStringList pressure = l.split(':');
                     if(pressure.length() == 2 && !pressure[1].isEmpty()){
                         m_ui->pressureDisplay->setText(pressure[1]);
+                        m_pressure = pressure[1].toFloat();
                     }
                 }
             }
         }
+        // When the reading is finish, we can add the points to the plot.
+        m_dataTemperature->add(QCPGraphData(m_time, m_temperature));
+        m_dataHumidity->add(QCPGraphData(m_time, m_humidity));
+        m_dataPressure->add(QCPGraphData(m_time, m_pressure));
+
+        // Update the plots.
+        m_ui->plotTemperatureWidget->rescaleAxes();
+        m_ui->plotTemperatureWidget->replot();
+        m_ui->plotHumidityWidget->rescaleAxes();
+        m_ui->plotHumidityWidget->replot();
+        m_ui->plotPressureWidget->rescaleAxes();
+        m_ui->plotPressureWidget->replot();
+
+        // We increase the time by 1.
+        ++m_time;
         m_canRead = false;
     }
 }

@@ -6,7 +6,6 @@
 #include <QSerialPortInfo>
 #include <QTimer>
 #include <QScrollBar>
-#include <QtPrintSupport>
 
 #include "qcustomplot.h"
 
@@ -76,15 +75,40 @@ private:
      * @brief m_consoleScrollBarCanMove Tell if we can move the scroll bar or not.
      */
     bool m_consoleScrollBarCanMove;
-
-    QSharedPointer<QCPGraphDataContainer> mData;
+    /**
+     * @brief m_dataTemperature All the points for the temperature in the plot.
+     */
+    QSharedPointer<QCPGraphDataContainer> m_dataTemperature;
+    /**
+     * @brief m_dataHumidity All the points for the humidity in the plot.
+     */
+    QSharedPointer<QCPGraphDataContainer> m_dataHumidity;
+    /**
+     * @brief m_dataPressure All the points for pressure in the plot.
+     */
+    QSharedPointer<QCPGraphDataContainer> m_dataPressure;
+    /**
+     * @brief m_time The time for the plot.
+     */
+    int m_time;
+    /**
+     * @brief m_temperature The current temperature.
+     */
+    float m_temperature;
+    /**
+     * @brief m_humidity The current humidity.
+     */
+    float m_humidity;
+    /**
+     * @brief m_pressure The current pressure.
+     */
+    float m_pressure;
 
 
     /**
      * @brief updateSerialPorts Update the serial ports list and the comboBox.
      */
     void updateSerialPorts();
-
     /**
      * @brief updateData Update the datas (temperature, humidity and pressure).
      */

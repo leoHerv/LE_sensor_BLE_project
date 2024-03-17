@@ -233,7 +233,27 @@
         <item>
          <layout class="QHBoxLayout" name="curvesHorizontalLayout">
           <item>
-           <widget class="QCustomPlot" name="customPlotWidget" native="true"/>
+           <widget class="QCustomPlot" name="plotTemperatureWidget" native="true"/>
+          </item>
+          <item>
+           <widget class="Line" name="line_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCustomPlot" name="plotHumidityWidget" native="true"/>
+          </item>
+          <item>
+           <widget class="Line" name="line_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCustomPlot" name="plotPressureWidget" native="true"/>
           </item>
          </layout>
         </item>
