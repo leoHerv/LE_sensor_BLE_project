@@ -40,6 +40,10 @@ private slots:
      * @brief on_deconnectionButton_clicked Deconnect the serial port.
      */
     void on_deconnectionButton_clicked();
+    /**
+     * @brief on_plotClearButton_clicked Clear all the graphs.
+     */
+    void on_plotClearButton_clicked();
 
 private:
     /**

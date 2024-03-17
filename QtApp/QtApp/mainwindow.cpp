@@ -275,3 +275,20 @@ void MainWindow::deconnectionDoneIndicator()
     m_ui->connectionIndicator->setStyleSheet("QWidget { background-color: rgb(255,160,122); border-radius: 10px; }");
 }
 
+
+void MainWindow::on_plotClearButton_clicked()
+{
+    // We clear all the points.
+    m_dataTemperature->clear();
+    m_dataHumidity->clear();
+    m_dataPressure->clear();
+
+    // We reset the graphs.
+    m_ui->plotTemperatureWidget->rescaleAxes();
+    m_ui->plotTemperatureWidget->replot();
+    m_ui->plotHumidityWidget->rescaleAxes();
+    m_ui->plotHumidityWidget->replot();
+    m_ui->plotPressureWidget->rescaleAxes();
+    m_ui->plotPressureWidget->replot();
+}
+
