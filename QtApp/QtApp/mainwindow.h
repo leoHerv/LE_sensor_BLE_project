@@ -44,6 +44,10 @@ private slots:
      * @brief on_plotClearButton_clicked Clear all the graphs.
      */
     void on_plotClearButton_clicked();
+    /**
+     * @brief changeDataRetrieveTime Change the interval of the timer to retrieve data.
+     */
+    void changeDataRetrieveTime();
 
 private:
     /**
@@ -92,9 +96,13 @@ private:
      */
     QSharedPointer<QCPGraphDataContainer> m_dataPressure;
     /**
-     * @brief m_time The time for the plot.
+     * @brief m_time The time for the plot in secondes.
      */
     int m_time;
+    /**
+     * @brief m_timeInterval The time between each graph update in secondes.
+     */
+    int m_timeInterval;
     /**
      * @brief m_temperature The current temperature.
      */

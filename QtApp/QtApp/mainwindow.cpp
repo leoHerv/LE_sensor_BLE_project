@@ -28,8 +28,11 @@ MainWindow::MainWindow(QWidget *parent)
     m_SerialScanTimer->setInterval(5000);
     m_SerialScanTimer->start();
 
+    int intervalDataScan = m_ui->TimerHorizontalSlider->value() * 1000;
+    m_timeInterval = intervalDataScan / 1000;
+
     m_DataScanTimer = new QTimer(this);
-    m_DataScanTimer->setInterval(3000);
+    m_DataScanTimer->setInterval(intervalDataScan);
     m_DataScanTimer->start();
 
     // ReadOnly is working weird, maybe add someting else.
@@ -45,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QFont legendFont = font();
     legendFont.setPointSize(10);
+    QString timeLabel = "Temps (s)";
 
     // Init plot for the Temperature.
     m_ui->plotTemperatureWidget->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
@@ -53,13 +57,13 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->plotTemperatureWidget->legend->setSelectedFont(legendFont);
     m_ui->plotTemperatureWidget->legend->setSelectableParts(QCPLegend::spItems);
     m_ui->plotTemperatureWidget->yAxis->setLabel("Température");
-    m_ui->plotTemperatureWidget->xAxis->setLabel("Temps");
+    m_ui->plotTemperatureWidget->xAxis->setLabel(timeLabel);
     m_ui->plotTemperatureWidget->clearGraphs();
 
     m_ui->plotTemperatureWidget->addGraph();
     m_ui->plotTemperatureWidget->graph()->setPen(QPen(Qt::black));
     m_ui->plotTemperatureWidget->graph()->setData(m_dataTemperature);
-    m_ui->plotTemperatureWidget->graph()->setName("Temperature");
+    m_ui->plotTemperatureWidget->graph()->setName("Température");
 
     // Init plot for the Humidity.
     m_ui->plotHumidityWidget->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
@@ -68,7 +72,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->plotHumidityWidget->legend->setSelectedFont(legendFont);
     m_ui->plotHumidityWidget->legend->setSelectableParts(QCPLegend::spItems);
     m_ui->plotHumidityWidget->yAxis->setLabel("Humidité");
-    m_ui->plotHumidityWidget->xAxis->setLabel("Temps");
+    m_ui->plotHumidityWidget->xAxis->setLabel(timeLabel);
     m_ui->plotHumidityWidget->clearGraphs();
 
     m_ui->plotHumidityWidget->addGraph();
@@ -83,13 +87,26 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->plotPressureWidget->legend->setSelectedFont(legendFont);
     m_ui->plotPressureWidget->legend->setSelectableParts(QCPLegend::spItems);
     m_ui->plotPressureWidget->yAxis->setLabel("Pression");
-    m_ui->plotPressureWidget->xAxis->setLabel("Temps");
+    m_ui->plotPressureWidget->xAxis->setLabel(timeLabel);
     m_ui->plotPressureWidget->clearGraphs();
 
     m_ui->plotPressureWidget->addGraph();
     m_ui->plotPressureWidget->graph()->setPen(QPen(Qt::blue));
     m_ui->plotPressureWidget->graph()->setData(m_dataPressure);
     m_ui->plotPressureWidget->graph()->setName("Pression");
+
+
+    // Add tick names for the slider.
+    QHBoxLayout *sliderLabelsTickLayout = new QHBoxLayout;
+
+    int sliderMin = m_ui->TimerHorizontalSlider->minimum();
+    int sliderMax = m_ui->TimerHorizontalSlider->maximum();
+
+    for (int i = sliderMin; i <= sliderMax; ++i) {
+        QLabel *label = new QLabel(QString::number(i));
+        sliderLabelsTickLayout->addWidget(label);
+    }
+    m_ui->sliderVerticalLayout->addLayout(sliderLabelsTickLayout);
 
 
     // If the timer have finish then we update the ports.
@@ -107,6 +124,9 @@ MainWindow::MainWindow(QWidget *parent)
     // If the scroll bar of the console is change by the user, we handle it.
     connect(m_ui->ConsoleTextBrowser->verticalScrollBar(), &QScrollBar::actionTriggered,
             this, &MainWindow::handleConsoleScrollBar);
+
+    connect(m_ui->TimerHorizontalSlider, &QSlider::valueChanged,
+            this, &MainWindow::changeDataRetrieveTime);
 }
 
 MainWindow::~MainWindow()
@@ -228,7 +248,7 @@ void MainWindow::updateData()
         m_ui->plotPressureWidget->replot();
 
         // We increase the time by 1.
-        ++m_time;
+        m_time += m_timeInterval;
         m_canRead = false;
     }
 }
@@ -290,5 +310,12 @@ void MainWindow::on_plotClearButton_clicked()
     m_ui->plotHumidityWidget->replot();
     m_ui->plotPressureWidget->rescaleAxes();
     m_ui->plotPressureWidget->replot();
+}
+
+void MainWindow::changeDataRetrieveTime()
+{
+    int interval = m_ui->TimerHorizontalSlider->value() * 1000;
+    m_timeInterval = interval / 1000;
+    m_DataScanTimer->setInterval(interval);
 }
 

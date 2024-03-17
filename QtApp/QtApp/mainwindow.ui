@@ -30,9 +30,9 @@
        <attribute name="title">
         <string>Main</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,1,1,0,1,6">
+       <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1,1,1,0,1,6">
         <item>
-         <layout class="QHBoxLayout" name="connectionHorizontalLayout" stretch="1,1,1,1,3">
+         <layout class="QHBoxLayout" name="connectionHorizontalLayout" stretch="1,1,1,1,2,1,0">
           <item>
            <widget class="QLabel" name="connectionIndicator">
             <property name="minimumSize">
@@ -113,6 +113,66 @@
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="silderLabel">
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Temps de récuperation des données :</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="sliderVerticalLayout">
+            <item>
+             <widget class="QSlider" name="TimerHorizontalSlider">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>5</number>
+              </property>
+              <property name="value">
+               <number>5</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="tickPosition">
+               <enum>QSlider::TicksBelow</enum>
+              </property>
+              <property name="tickInterval">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <spacer name="horizontalSpacer">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -120,7 +180,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>40</width>
-              <height>0</height>
+              <height>20</height>
              </size>
             </property>
            </spacer>
@@ -231,7 +291,7 @@
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout">
+         <layout class="QHBoxLayout" name="graphButtonHorizontalLayout">
           <item>
            <widget class="QPushButton" name="plotClearButton">
             <property name="minimumSize">
