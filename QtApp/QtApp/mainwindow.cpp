@@ -113,17 +113,8 @@ void MainWindow::updateData()
     // If the serial port is connected and we can read.
     if(m_connectedPort && m_canRead)
     {
-        // We read on the serial port some data.
+        // We read on the serial port all the data.
         QString line = m_Serial->readAll();
-        /*
-        char buffer[1024];
-        qint64 bytesRead = m_Serial->read(buffer, 1024);
-        if (bytesRead == -1) {
-            qWarning() << "Error when reading on the serial port: " << m_Serial->errorString();
-            return;
-        }
-        line.append(QString::fromLatin1(buffer, bytesRead));
-        */
 
         // We split the string into multiple lines.
         QStringList lines = line.split( "\r\n" );

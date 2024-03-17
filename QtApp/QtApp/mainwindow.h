@@ -6,6 +6,8 @@
 #include <QSerialPortInfo>
 #include <QTimer>
 #include <QScrollBar>
+#include <QtPrintSupport>
+
 #include "qcustomplot.h"
 
 QT_BEGIN_NAMESPACE
@@ -75,6 +77,7 @@ private:
      */
     bool m_consoleScrollBarCanMove;
 
+    QSharedPointer<QCPGraphDataContainer> mData;
 
 
     /**

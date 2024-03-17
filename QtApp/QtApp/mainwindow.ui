@@ -233,7 +233,7 @@
         <item>
          <layout class="QHBoxLayout" name="curvesHorizontalLayout">
           <item>
-           <widget class="qCustomPlot" name="customPlotWidget" native="true"/>
+           <widget class="QCustomPlot" name="customPlotWidget" native="true"/>
           </item>
          </layout>
         </item>
@@ -293,7 +293,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>qCustomPlot</class>
+   <class>QCustomPlot</class>
    <extends>QWidget</extends>
    <header>qcustomplot.h</header>
    <container>1</container>
