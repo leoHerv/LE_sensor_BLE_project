@@ -231,7 +231,11 @@
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="curvesHorizontalLayout"/>
+         <layout class="QHBoxLayout" name="curvesHorizontalLayout">
+          <item>
+           <widget class="qCustomPlot" name="customPlotWidget" native="true"/>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -287,6 +291,14 @@
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
