@@ -42,6 +42,9 @@
        <layout class="QVBoxLayout" name="verticalLayout" stretch="5,5,5,5,0,10,60">
         <item>
          <layout class="QHBoxLayout" name="connectionHorizontalLayout" stretch="1,1,1,1,2,1,0">
+          <property name="leftMargin">
+           <number>4</number>
+          </property>
           <item>
            <widget class="QLabel" name="connectionIndicator">
             <property name="minimumSize">
@@ -55,6 +58,9 @@
               <width>20</width>
               <height>20</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255,160,122); border-radius: 10px;</string>
             </property>
             <property name="text">
              <string/>
@@ -198,6 +204,9 @@
         </item>
         <item>
          <layout class="QHBoxLayout" name="temperatureHorizontalLayout" stretch="1,10">
+          <property name="leftMargin">
+           <number>4</number>
+          </property>
           <item>
            <widget class="QLabel" name="temperatureLabel">
             <property name="minimumSize">
@@ -231,6 +240,9 @@
           <property name="sizeConstraint">
            <enum>QLayout::SetDefaultConstraint</enum>
           </property>
+          <property name="leftMargin">
+           <number>4</number>
+          </property>
           <item>
            <widget class="QLabel" name="humidityLabel">
             <property name="minimumSize">
@@ -263,6 +275,9 @@
          <layout class="QHBoxLayout" name="pressureHorizontalLayout" stretch="1,10">
           <property name="sizeConstraint">
            <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
+          <property name="leftMargin">
+           <number>4</number>
           </property>
           <item>
            <widget class="QLabel" name="pressureLabel">
@@ -301,6 +316,9 @@
         </item>
         <item>
          <layout class="QHBoxLayout" name="graphButtonHorizontalLayout">
+          <property name="leftMargin">
+           <number>4</number>
+          </property>
           <item>
            <widget class="QPushButton" name="plotClearButton">
             <property name="minimumSize">
