@@ -686,7 +686,7 @@ real_values read_HTS221(){
 		if (humidity_perc > 100) {
 		  humidity_perc = 100;
 		}
-		/*
+		/* Print of the humidity.
 		sprintf((char *)tx_buffer, "Humidity [%%]:%3.2f\r\n", humidity_perc);
 		HAL_UART_Transmit(&huart2, tx_buffer, strlen((char const *)tx_buffer), 1000);
 		*/
@@ -698,7 +698,7 @@ real_values read_HTS221(){
 		hts221_temperature_raw_get(&dev_ctx_HTS221, &data_raw_temperature);
 		temperature_degC = linear_interpolation(&lin_temp,
 												data_raw_temperature);
-		/*
+		/* Print of the temperature.
 		sprintf((char *)tx_buffer, "Temperature [degC]:%6.2f\r\n",
 				temperature_degC );
 		HAL_UART_Transmit(&huart2, tx_buffer, strlen((char const *)tx_buffer), 1000);
@@ -718,7 +718,7 @@ real_values read_LPS22HH(){
 	   memset(&data_raw_pressure, 0x00, sizeof(uint32_t));
 	   lps22hh_pressure_raw_get(&dev_ctx_LPS22HH, &data_raw_pressure);
 	   pressure_hPa = lps22hh_from_lsb_to_hpa( data_raw_pressure);
-	   /*
+	   /* Print of the pressure.
 	   sprintf((char *)tx_buffer, "pressure [hPa]:%6.2f\r\n", pressure_hPa);
 	   HAL_UART_Transmit(&huart2, tx_buffer, strlen((char const *)tx_buffer), 1000);
 	   */
@@ -729,7 +729,7 @@ real_values read_LPS22HH(){
 	   lps22hh_temperature_raw_get(&dev_ctx_LPS22HH, &data_raw_temperature);
 	   temperature_degC = lps22hh_from_lsb_to_celsius(
 							data_raw_temperature );
-	   /*
+	   /* Print of the temperature.
 	   sprintf((char *)tx_buffer, "temperature [degC]:%6.2f\r\n",
 			   temperature_degC );
 	   HAL_UART_Transmit(&huart2, tx_buffer, strlen((char const *)tx_buffer), 1000);
