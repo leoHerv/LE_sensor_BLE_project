@@ -470,6 +470,9 @@ static void User_Process(void)
 	// We wait to not overflow the port.
 	HAL_Delay(1000);
 
+	// This timing is adapted to the subject, but is to slow to see the result on the apps.
+	//HAL_Delay(10000);
+
     if (connected)
     {
       /* Set a random seed */
