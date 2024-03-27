@@ -32,11 +32,11 @@ extern "C" {
 #include <string.h>
 
 /*---------- Print messages from BLE2 files at user level -----------*/
-#define BLE2_DEBUG      1
+#define BLE2_DEBUG      0
 /*---------- Print the data travelling over the SPI in the .csv format compatible with the ST BlueNRG GUI -----------*/
-#define PRINT_CSV_FORMAT      1
+#define PRINT_CSV_FORMAT      0
 /*---------- Print messages from BLE2 files at middleware level -----------*/
-#define BLUENRG2_DEBUG      1
+#define BLUENRG2_DEBUG      0
 /*---------- Print the data of the sensors -----------*/
 #define PRINT      1
 
