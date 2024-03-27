@@ -41,7 +41,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout" stretch="5,5,5,5,0,10,60">
         <item>
-         <layout class="QHBoxLayout" name="connectionHorizontalLayout" stretch="1,1,1,1,2,1,0">
+         <layout class="QHBoxLayout" name="connectionHorizontalLayout" stretch="1,1,1,1,3,1,0">
           <property name="leftMargin">
            <number>4</number>
           </property>
@@ -131,18 +131,18 @@
            <widget class="QLabel" name="silderLabel">
             <property name="minimumSize">
              <size>
-              <width>200</width>
+              <width>260</width>
               <height>30</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>200</width>
+              <width>260</width>
               <height>30</height>
              </size>
             </property>
             <property name="text">
-             <string>Temps de récuperation des données :</string>
+             <string>Temps de récuperation des données (en s) :</string>
             </property>
             <property name="wordWrap">
              <bool>true</bool>
@@ -203,7 +203,7 @@
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="temperatureHorizontalLayout" stretch="1,10">
+         <layout class="QHBoxLayout" name="temperatureHorizontalLayout" stretch="1,10,0">
           <property name="leftMargin">
            <number>4</number>
           </property>
@@ -212,7 +212,13 @@
             <property name="minimumSize">
              <size>
               <width>80</width>
-              <height>0</height>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>20</height>
              </size>
             </property>
             <property name="text">
@@ -224,8 +230,14 @@
            <widget class="QLabel" name="temperatureDisplay">
             <property name="minimumSize">
              <size>
-              <width>50</width>
-              <height>0</height>
+              <width>80</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>20</height>
              </size>
             </property>
             <property name="text">
@@ -233,10 +245,23 @@
             </property>
            </widget>
           </item>
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="humidityHorizontalLayout_" stretch="1,10">
+         <layout class="QHBoxLayout" name="humidityHorizontalLayout_" stretch="1,10,0">
           <property name="sizeConstraint">
            <enum>QLayout::SetDefaultConstraint</enum>
           </property>
@@ -248,7 +273,13 @@
             <property name="minimumSize">
              <size>
               <width>80</width>
-              <height>0</height>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>20</height>
              </size>
             </property>
             <property name="text">
@@ -260,8 +291,14 @@
            <widget class="QLabel" name="humididyDisplay">
             <property name="minimumSize">
              <size>
-              <width>50</width>
-              <height>0</height>
+              <width>80</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>20</height>
              </size>
             </property>
             <property name="text">
@@ -269,10 +306,23 @@
             </property>
            </widget>
           </item>
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="pressureHorizontalLayout" stretch="1,10">
+         <layout class="QHBoxLayout" name="pressureHorizontalLayout" stretch="1,10,0">
           <property name="sizeConstraint">
            <enum>QLayout::SetDefaultConstraint</enum>
           </property>
@@ -284,7 +334,13 @@
             <property name="minimumSize">
              <size>
               <width>80</width>
-              <height>0</height>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>20</height>
              </size>
             </property>
             <property name="text">
@@ -296,14 +352,33 @@
            <widget class="QLabel" name="pressureDisplay">
             <property name="minimumSize">
              <size>
-              <width>50</width>
-              <height>0</height>
+              <width>80</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>20</height>
              </size>
             </property>
             <property name="text">
              <string>0</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>

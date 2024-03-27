@@ -56,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->plotTemperatureWidget->legend->setFont(legendFont);
     m_ui->plotTemperatureWidget->legend->setSelectedFont(legendFont);
     m_ui->plotTemperatureWidget->legend->setSelectableParts(QCPLegend::spItems);
-    m_ui->plotTemperatureWidget->yAxis->setLabel("Température");
+    m_ui->plotTemperatureWidget->yAxis->setLabel("Température (°C)");
     m_ui->plotTemperatureWidget->xAxis->setLabel(timeLabel);
     m_ui->plotTemperatureWidget->clearGraphs();
 
@@ -71,7 +71,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->plotHumidityWidget->legend->setFont(legendFont);
     m_ui->plotHumidityWidget->legend->setSelectedFont(legendFont);
     m_ui->plotHumidityWidget->legend->setSelectableParts(QCPLegend::spItems);
-    m_ui->plotHumidityWidget->yAxis->setLabel("Humidité");
+    m_ui->plotHumidityWidget->yAxis->setLabel("Humidité (g/m3)");
     m_ui->plotHumidityWidget->xAxis->setLabel(timeLabel);
     m_ui->plotHumidityWidget->clearGraphs();
 
@@ -86,7 +86,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->plotPressureWidget->legend->setFont(legendFont);
     m_ui->plotPressureWidget->legend->setSelectedFont(legendFont);
     m_ui->plotPressureWidget->legend->setSelectableParts(QCPLegend::spItems);
-    m_ui->plotPressureWidget->yAxis->setLabel("Pression");
+    m_ui->plotPressureWidget->yAxis->setLabel("Pression (hPa)");
     m_ui->plotPressureWidget->xAxis->setLabel(timeLabel);
     m_ui->plotPressureWidget->clearGraphs();
 
@@ -214,21 +214,21 @@ void MainWindow::updateData()
                 if(l.startsWith("temperature :")){
                     QStringList temperature = l.split(':');
                     if(temperature.length() == 2 && !temperature[1].isEmpty()){
-                        m_ui->temperatureDisplay->setText(temperature[1]);
+                        m_ui->temperatureDisplay->setText(temperature[1] + " °C");
                         m_temperature = temperature[1].toFloat();
                     }
                 }
                 else if(l.startsWith("humidity :")){
                     QStringList humidity = l.split(':');
                     if(humidity.length() == 2 && !humidity[1].isEmpty()){
-                        m_ui->humididyDisplay->setText(humidity[1]);
+                        m_ui->humididyDisplay->setText(humidity[1] + " g/m3");
                         m_humidity = humidity[1].toFloat();
                     }
                 }
                 else if(l.startsWith("pressure :")){
                     QStringList pressure = l.split(':');
                     if(pressure.length() == 2 && !pressure[1].isEmpty()){
-                        m_ui->pressureDisplay->setText(pressure[1]);
+                        m_ui->pressureDisplay->setText(pressure[1] + " hPa");
                         m_pressure = pressure[1].toFloat();
                     }
                 }

@@ -95,7 +95,7 @@ static float temperature_degC;
 static uint32_t data_raw_pressure;
 static float pressure_hPa;
 static uint8_t whoamI, rst;
-static uint8_t tx_buffer[1000];
+//static uint8_t tx_buffer[1000];
 
 stmdev_ctx_t dev_ctx_HTS221;
 stmdev_ctx_t dev_ctx_LPS22HH;
