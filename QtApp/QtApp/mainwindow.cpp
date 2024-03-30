@@ -71,7 +71,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->plotHumidityWidget->legend->setFont(legendFont);
     m_ui->plotHumidityWidget->legend->setSelectedFont(legendFont);
     m_ui->plotHumidityWidget->legend->setSelectableParts(QCPLegend::spItems);
-    m_ui->plotHumidityWidget->yAxis->setLabel("Humidité (g/m3)");
+    m_ui->plotHumidityWidget->yAxis->setLabel("Humidité (%)");
     m_ui->plotHumidityWidget->xAxis->setLabel(timeLabel);
     m_ui->plotHumidityWidget->clearGraphs();
 
@@ -221,7 +221,7 @@ void MainWindow::updateData()
                 else if(l.startsWith("humidity :")){
                     QStringList humidity = l.split(':');
                     if(humidity.length() == 2 && !humidity[1].isEmpty()){
-                        m_ui->humididyDisplay->setText(humidity[1] + " g/m3");
+                        m_ui->humididyDisplay->setText(humidity[1] + " %");
                         m_humidity = humidity[1].toFloat();
                     }
                 }
