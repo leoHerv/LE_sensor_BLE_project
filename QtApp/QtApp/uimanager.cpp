@@ -30,6 +30,10 @@ UiManager::UiManager(Ui::MainWindow *ui) :
     // If the scroll bar of the console is change by the user, we handle it.
     connect(m_ui->ConsoleTextBrowser->verticalScrollBar(), &QScrollBar::actionTriggered,
             this, &UiManager::handleConsoleScrollBar);
+
+
+    connect(m_ui->TimerHorizontalSlider, &QSlider::valueChanged,
+            this, &UiManager::updateSliderTimerValue);
 }
 
 UiManager::~UiManager() {}
@@ -92,5 +96,11 @@ void UiManager::handleConsoleScrollBar()
 void UiManager::clearConsole()
 {
     m_ui->ConsoleTextBrowser->clear();
+}
+
+void UiManager::updateSliderTimerValue()
+{
+    int interval = m_ui->TimerHorizontalSlider->value();
+    emit newSliderTimerValue(interval);
 }
 

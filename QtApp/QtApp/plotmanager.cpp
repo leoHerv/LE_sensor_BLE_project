@@ -74,5 +74,7 @@ void PlotManager::clearPlots()
     replot(m_ui->plotTemperatureWidget);
     replot(m_ui->plotHumidityWidget);
     replot(m_ui->plotPressureWidget);
+
+    emit restartTimer(0);
 }
 

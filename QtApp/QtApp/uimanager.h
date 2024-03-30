@@ -16,6 +16,9 @@ public:
     UiManager(Ui::MainWindow *ui);
     ~UiManager();
 
+signals:
+    void newSliderTimerValue(int intervalTimer);
+
 public slots:
     void updateConsole(const QString line);
     void updateEnvironnementValues(float temperature, float humidity, float pressure, int time);
@@ -24,6 +27,7 @@ public slots:
     void updatePressure(float pressure);
     void updateConnectionIndicator(bool connected);
     void clearConsole();
+    void updateSliderTimerValue();
 
 private:
     Ui::MainWindow* m_ui;

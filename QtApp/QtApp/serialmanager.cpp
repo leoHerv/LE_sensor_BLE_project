@@ -58,7 +58,7 @@ void SerialManager::updateSerialPorts() {
     }
 }
 
-void SerialManager::connectToSerial(const QString &portName) {
+void SerialManager::connectToSerial() {
     // Desactivation of the button of connection.
     m_ui->connectionButton->setEnabled(false);
     QString serialLoc = m_ui->connectionComboBox->currentData().toString();

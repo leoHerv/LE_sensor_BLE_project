@@ -28,6 +28,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+signals:
+    void connectionButton_clicked();
+    void consoleClearButton_clicked();
+    void deconnectionButton_clicked();
+    void plotClearButton_clicked();
+
 private slots:
     /**
      * @brief on_connectionButton_clicked Try to connect with a serial port when the "connectionButton" is clicked.

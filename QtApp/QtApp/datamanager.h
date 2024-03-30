@@ -20,12 +20,12 @@ public slots:
      * @brief setTime Set the m_time value with new 'time'.
      * @param time The new time value.
      */
-    void setTime(float time);
+    void setTime(int time);
     /**
      * @brief setTimeInterval Set the m_timeInterval value with the new 'timeInterval'.
      * @param timeInterval The new time interval value.
      */
-    void setTimeInterval(float timeInterval);
+    void setTimeInterval(int timeInterval);
     /**
      * @brief processDatas Process the datas of the passed string.
      * @param datas The datas to process.

@@ -18,7 +18,8 @@ public:
     PlotManager(Ui::MainWindow *ui, QFont font);
     ~PlotManager(){};
 
-    void initializePlots();
+signals:
+    void restartTimer(int time);
 
 public slots:
     void addDataPoint(float temperature, float humidity, float pressure, int time);
@@ -62,6 +63,8 @@ private:
      */
     void setupPlot(QSharedPointer<QCPGraphDataContainer>* graphData,
                    QCustomPlot* plot, QString labelYAxe, QString graphName, Qt::GlobalColor penColor);
+
+    void initializePlots();
 };
 
 #endif // PLOTMANAGER_H

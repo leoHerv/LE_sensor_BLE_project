@@ -37,7 +37,7 @@ public slots:
      */
     void serialReadyRead();
     void updateSerialPorts();
-    void connectToSerial(const QString &portName);
+    void connectToSerial();
     void disconnectSerial();
     void readSerialData();
     /**

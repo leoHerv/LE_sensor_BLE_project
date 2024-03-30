@@ -13,12 +13,12 @@ DataManager::~DataManager() {}
 
 
 
-void DataManager::setTime(float time)
+void DataManager::setTime(int time)
 {
     m_time = time;
 }
 
-void DataManager::setTimeInterval(float timeInterval)
+void DataManager::setTimeInterval(int timeInterval)
 {
     m_timeInterval = timeInterval;
 }
@@ -55,7 +55,6 @@ void DataManager::processDatas(const QString datas)
     }
     emit newDatas(m_temperature, m_humidity, m_pressure, m_time);
 
-    // We increase the time by 1.
     m_time += m_timeInterval;
 }
 
