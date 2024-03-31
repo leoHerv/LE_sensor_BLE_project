@@ -14,7 +14,7 @@ UiManager::UiManager(Ui::MainWindow *ui) :
     // Not serial port connected.
     updateConnectionIndicator(false);
 
-    // Add tick names for the slider.
+    // Add tick labels for the slider.
     QHBoxLayout *sliderLabelsTickLayout = new QHBoxLayout;
 
     int sliderMin = m_ui->TimerHorizontalSlider->minimum();
@@ -30,7 +30,7 @@ UiManager::UiManager(Ui::MainWindow *ui) :
     connect(m_ui->ConsoleTextBrowser->verticalScrollBar(), &QScrollBar::actionTriggered,
             this, &UiManager::handleConsoleScrollBar);
 
-
+    // If the slider change of value, we trigger a signal.
     connect(m_ui->TimerHorizontalSlider, &QSlider::valueChanged,
             this, &UiManager::updateSliderTimerValue);
 }

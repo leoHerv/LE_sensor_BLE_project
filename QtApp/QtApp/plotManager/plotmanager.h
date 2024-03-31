@@ -64,6 +64,10 @@ private:
     QSharedPointer<QCPGraphDataContainer> m_dataPressure;
 
     /**
+     * @brief replotPlots Replot all the plots.
+     */
+    void replotPlots();
+    /**
      * @brief setupPlot Setup a plot.
      * @param graphData The graph data that use to draw the plot.
      * @param plot The plot that we setup.

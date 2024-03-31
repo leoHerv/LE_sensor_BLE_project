@@ -70,6 +70,7 @@ void SerialManager::connectToSerial() {
         emit connectionIndicator(false);
     }
 
+    // Init of the serial port.
     m_serial->setPortName(serialLoc);
     m_serial->setBaudRate(QSerialPort::Baud115200);
     m_serial->setDataBits(QSerialPort::Data8);

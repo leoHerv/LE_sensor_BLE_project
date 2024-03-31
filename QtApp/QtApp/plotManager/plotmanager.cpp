@@ -8,6 +8,44 @@ PlotManager::PlotManager(Ui::MainWindow *ui, QFont font) :
     initializePlots();
 }
 
+void PlotManager::addDataPoint(float temperature, float humidity, float pressure, int time)
+{
+    // When the reading is finish, we can add the points to the plot.
+    m_dataTemperature->add(QCPGraphData(time, temperature));
+    m_dataHumidity->add(QCPGraphData(time, humidity));
+    m_dataPressure->add(QCPGraphData(time, pressure));
+
+    // Update the plots.
+    replotPlots();
+}
+
+void PlotManager::clearPlots()
+{
+    // We clear all the points.
+    m_dataTemperature->clear();
+    m_dataHumidity->clear();
+    m_dataPressure->clear();
+
+    // We reset the graphs.
+    replotPlots();
+
+    // We reset the time to 0.
+    emit restartTime(0);
+}
+
+void replot(QCustomPlot* plot)
+{
+    plot->rescaleAxes();
+    plot->replot();
+}
+
+void PlotManager::replotPlots()
+{
+    replot(m_ui->plotTemperatureWidget);
+    replot(m_ui->plotHumidityWidget);
+    replot(m_ui->plotPressureWidget);
+}
+
 void PlotManager::setupPlot(QSharedPointer<QCPGraphDataContainer>* graphData,
                             QCustomPlot* plot, QString labelYAxe, QString graphName, Qt::GlobalColor penColor)
 {
@@ -42,38 +80,3 @@ void PlotManager::initializePlots()
     // Init plot for the Pressure.
     setupPlot(&m_dataPressure, m_ui->plotPressureWidget, "Pression (hPa)", "Pression", Qt::blue);
 }
-
-void replot(QCustomPlot* plot)
-{
-    plot->rescaleAxes();
-    plot->replot();
-}
-
-void PlotManager::addDataPoint(float temperature, float humidity, float pressure, int time)
-{
-    // When the reading is finish, we can add the points to the plot.
-    m_dataTemperature->add(QCPGraphData(time, temperature));
-    m_dataHumidity->add(QCPGraphData(time, humidity));
-    m_dataPressure->add(QCPGraphData(time, pressure));
-
-    // Update the plots.
-    replot(m_ui->plotTemperatureWidget);
-    replot(m_ui->plotHumidityWidget);
-    replot(m_ui->plotPressureWidget);
-}
-
-void PlotManager::clearPlots()
-{
-    // We clear all the points.
-    m_dataTemperature->clear();
-    m_dataHumidity->clear();
-    m_dataPressure->clear();
-
-    // We reset the graphs.
-    replot(m_ui->plotTemperatureWidget);
-    replot(m_ui->plotHumidityWidget);
-    replot(m_ui->plotPressureWidget);
-
-    emit restartTime(0);
-}
-
