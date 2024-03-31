@@ -1,5 +1,4 @@
 #include "serialmanager.h"
-#include "ui_mainwindow.h"
 
 SerialManager::SerialManager(Ui::MainWindow *ui) :
     QObject(nullptr),

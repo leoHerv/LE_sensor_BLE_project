@@ -1,8 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include "./ui_mainwindow.h"
+#include "mainInclude.h"
 
 #include <QSerialPort>
 #include <QSerialPortInfo>
@@ -14,6 +13,7 @@
 #include "serialmanager.h"
 #include "uimanager.h"
 
+/** Declared in the ui_mainwindow.h file **/
 QT_BEGIN_NAMESPACE
     namespace Ui {
         class MainWindow;
@@ -29,9 +29,21 @@ public:
     ~MainWindow();
 
 signals:
+    /**
+     * @brief connectionButton_clicked Triggered when the connection button is clicked.
+     */
     void connectionButton_clicked();
-    void consoleClearButton_clicked();
+    /**
+     * @brief deconnectionButton_clicked Triggered when the deconnection button is clicked.
+     */
     void deconnectionButton_clicked();
+    /**
+     * @brief consoleClearButton_clicked Triggered when the console clear button is clicked.
+     */
+    void consoleClearButton_clicked();
+    /**
+     * @brief plotClearButton_clicked Triggered when the plot clear button is clicked.
+     */
     void plotClearButton_clicked();
 
 private slots:
@@ -40,13 +52,13 @@ private slots:
      */
     void on_connectionButton_clicked();
     /**
-     * @brief on_consoleClearButton_clicked Clear the console.
-     */
-    void on_consoleClearButton_clicked();
-    /**
      * @brief on_deconnectionButton_clicked Deconnect the serial port.
      */
     void on_deconnectionButton_clicked();
+    /**
+     * @brief on_consoleClearButton_clicked Clear the console.
+     */
+    void on_consoleClearButton_clicked();
     /**
      * @brief on_plotClearButton_clicked Clear all the graphs.
      */
@@ -58,10 +70,21 @@ private:
      */
     Ui::MainWindow *m_ui;
 
-
+    /**
+     * @brief m_dataManager The class that manage all the datas of the application.
+     */
     DataManager* m_dataManager;
+    /**
+     * @brief m_plotManager The class that manage all the plots of the application.
+     */
     PlotManager* m_plotManager;
+    /**
+     * @brief m_serialManager The class that manage the serial port part.
+     */
     SerialManager* m_serialManager;
+    /**
+     * @brief m_uiManager The class that manager the ui of the application.
+     */
     UiManager* m_uiManager;
 
 };

@@ -1,5 +1,4 @@
 #include "uimanager.h"
-#include "ui_mainwindow.h"
 
 UiManager::UiManager(Ui::MainWindow *ui) :
     QObject(nullptr),
@@ -49,6 +48,11 @@ void UiManager::updateConsole(const QString line) {
     }
 }
 
+void UiManager::clearConsole()
+{
+    m_ui->ConsoleTextBrowser->clear();
+}
+
 void UiManager::updateEnvironnementValues(float temperature, float humidity, float pressure, int time)
 {
     updateTemperature(temperature);
@@ -91,11 +95,6 @@ void UiManager::handleConsoleScrollBar()
     else{
         m_consoleScrollBarCanMove = false;
     }
-}
-
-void UiManager::clearConsole()
-{
-    m_ui->ConsoleTextBrowser->clear();
 }
 
 void UiManager::updateSliderTimerValue()

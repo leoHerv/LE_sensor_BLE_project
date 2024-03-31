@@ -11,7 +11,18 @@ public:
     ~DataManager();
 
 signals:
+    /**
+     * @brief dataLine Triggered when a new data line is process.
+     * @param line The data line that we have process.
+     */
     void dataLine(const QString line);
+    /**
+     * @brief newDatas Triggered when new environnement values are read.
+     * @param temperature The new temperature value.
+     * @param humidity The new humidity value.
+     * @param pressure The new pressure value.
+     * @param time The new time value.
+     */
     void newDatas(float temperature, float humidity, float pressure, int time);
 
 public slots:
@@ -34,11 +45,11 @@ public slots:
 
 private:
     /**
-     * @brief m_time The time for the plot in secondes.
+     * @brief m_time The time in secondes.
      */
     int m_time;
     /**
-     * @brief m_timeInterval The time between each graph update in secondes.
+     * @brief m_timeInterval The interval in secondes to add to the time.
      */
     int m_timeInterval;
     /**

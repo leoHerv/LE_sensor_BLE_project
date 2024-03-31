@@ -11,8 +11,6 @@ DataManager::DataManager() :
 
 DataManager::~DataManager() {}
 
-
-
 void DataManager::setTime(int time)
 {
     m_time = time;

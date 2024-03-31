@@ -12,23 +12,31 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets SerialPort PrintSupport)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets SerialPort PrintSupport)
 
+include_directories(/
+                    plotManager/customPlot
+                    plotManager
+                    dataManager
+                    serialManager
+                    uiManager)
+
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        mainInclude.h
+        plotManager/customPlot/qcustomplot.cpp plotManager/customPlot/qcustomplot.h
+        serialManager/serialmanager.h serialManager/serialmanager.cpp
+        uiManager/uimanager.h uiManager/uimanager.cpp
+        plotManager/plotmanager.h plotManager/plotmanager.cpp
+        dataManager/datamanager.h dataManager/datamanager.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(QtApp
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        qcustomplot.cpp qcustomplot.h
-        serialmanager.h serialmanager.cpp
-        uimanager.h uimanager.cpp
-        plotmanager.h plotmanager.cpp
-        datamanager.h datamanager.cpp
-
+        mainInclude.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET QtApp APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

@@ -1,10 +1,12 @@
 #ifndef SERIALMANAGER_H
 #define SERIALMANAGER_H
 
-#include <QMainWindow>
 #include <QSerialPort>
 #include <QSerialPortInfo>
 
+#include "../mainInclude.h"
+
+/** Declared in the ui_mainwindow.h file **/
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -20,12 +22,12 @@ public:
 
 signals:
     /**
-     * @brief serialDataReceived Send when new datas are received.
+     * @brief serialDataReceived Triggered when new datas are received from the serial port.
      * @param data The datas that have been received.
      */
     void serialDataReceived(const QString &data);
     /**
-     * @brief connectionIndicator Is the state of the connection change, a signal is send.
+     * @brief connectionIndicator Triggered when the connection state change.
      * @param state The new state of the connection.
      */
     void connectionIndicator(bool state);
@@ -33,12 +35,24 @@ signals:
 public slots:
 
     /**
-     * @brief serialReadyRead Read the data from the serial port selected.
+     * @brief serialReadyRead Tell if we can read or not on the selected serial port.
      */
     void serialReadyRead();
+    /**
+     * @brief updateSerialPorts Update the serial ports available.
+     */
     void updateSerialPorts();
+    /**
+     * @brief connectToSerial Try to connect to the selected serial port.
+     */
     void connectToSerial();
+    /**
+     * @brief disconnectSerial Disconnect from the conencted serial port.
+     */
     void disconnectSerial();
+    /**
+     * @brief readSerialData Read all the data from the selected serial port.
+     */
     void readSerialData();
     /**
      * @brief changeDataScanTimer Change the interval between two data read.

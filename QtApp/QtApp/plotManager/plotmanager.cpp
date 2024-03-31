@@ -1,5 +1,4 @@
 #include "plotmanager.h"
-#include "ui_mainwindow.h"
 
 PlotManager::PlotManager(Ui::MainWindow *ui, QFont font) :
     QObject(nullptr),
@@ -75,6 +74,6 @@ void PlotManager::clearPlots()
     replot(m_ui->plotHumidityWidget);
     replot(m_ui->plotPressureWidget);
 
-    emit restartTimer(0);
+    emit restartTime(0);
 }
 
