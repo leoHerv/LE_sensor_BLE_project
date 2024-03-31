@@ -28,6 +28,7 @@ public slots:
     void updateConnectionIndicator(bool connected);
     void clearConsole();
     void updateSliderTimerValue();
+    void clearEnvironnementValues();
 
 private:
     Ui::MainWindow* m_ui;

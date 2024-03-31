@@ -16,30 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
     m_serialManager = new SerialManager(m_ui);
     m_uiManager = new UiManager(m_ui);
 
-    // When we have new datas on the serial port, we send them to the dataManager.
-    connect(m_serialManager, &SerialManager::serialDataReceived,
-            m_dataManager, &DataManager::processDatas);
 
-    connect(m_plotManager, &PlotManager::restartTimer,
-            m_dataManager, &DataManager::setTime);
-
-    connect(this, &MainWindow::connectionButton_clicked,
-            m_serialManager, &SerialManager::connectToSerial);
-
-    connect(this, &MainWindow::consoleClearButton_clicked,
-            m_uiManager, &UiManager::clearConsole);
-
-    connect(this, &MainWindow::deconnectionButton_clicked,
-            m_serialManager, &SerialManager::disconnectSerial);
-
-    connect(this, &MainWindow::plotClearButton_clicked,
-            m_plotManager, &PlotManager::clearPlots);
-
-    connect(m_serialManager, &SerialManager::connectionIndicator,
-            m_uiManager, &UiManager::updateConnectionIndicator);
-
-    connect(m_serialManager, &SerialManager::serialDataReceived,
-            m_dataManager, &DataManager::processDatas);
+    /**----- Connect DataManager Signals -----**/
 
     connect(m_dataManager, &DataManager::dataLine,
             m_uiManager, &UiManager::updateConsole);
@@ -50,12 +28,44 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_dataManager, &DataManager::newDatas,
             m_uiManager, &UiManager::updateEnvironnementValues);
 
+    /**----- Connect PlotManager Signals -----**/
+
+    connect(m_plotManager, &PlotManager::restartTimer,
+            m_dataManager, &DataManager::setTime);
+
+    /**----- Connect SerialManager Signals -----**/
+
+    // When we have new datas on the serial port, we send them to the dataManager.
+    connect(m_serialManager, &SerialManager::serialDataReceived,
+            m_dataManager, &DataManager::processDatas);
+
+    connect(m_serialManager, &SerialManager::connectionIndicator,
+            m_uiManager, &UiManager::updateConnectionIndicator);
+
+    /**----- Connect UiManager Signals -----**/
+
     connect(m_uiManager, &UiManager::newSliderTimerValue,
             m_serialManager, &SerialManager::changeDataScanTimer);
 
     connect(m_uiManager, &UiManager::newSliderTimerValue,
             m_dataManager, &DataManager::setTimeInterval);
 
+    /**----- Connect MainWindow Signals -----**/
+
+    connect(this, &MainWindow::plotClearButton_clicked,
+            m_plotManager, &PlotManager::clearPlots);
+
+    connect(this, &MainWindow::plotClearButton_clicked,
+            m_uiManager, &UiManager::clearEnvironnementValues);
+
+    connect(this, &MainWindow::connectionButton_clicked,
+            m_serialManager, &SerialManager::connectToSerial);
+
+    connect(this, &MainWindow::deconnectionButton_clicked,
+            m_serialManager, &SerialManager::disconnectSerial);
+
+    connect(this, &MainWindow::consoleClearButton_clicked,
+            m_uiManager, &UiManager::clearConsole);
 }
 
 MainWindow::~MainWindow()

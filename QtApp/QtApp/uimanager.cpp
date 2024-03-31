@@ -104,3 +104,10 @@ void UiManager::updateSliderTimerValue()
     emit newSliderTimerValue(interval);
 }
 
+void UiManager::clearEnvironnementValues()
+{
+    m_ui->temperatureDisplay->setText(QString::number(0));
+    m_ui->humididyDisplay->setText(QString::number(0));
+    m_ui->pressureDisplay->setText(QString::number(0));
+}
+
