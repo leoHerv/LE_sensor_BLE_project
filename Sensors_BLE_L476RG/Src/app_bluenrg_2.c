@@ -115,11 +115,13 @@ static void Reset_Motion_Values(void);
 
 /* USER CODE BEGIN PFP */
 
+// Pressure sensor : LPS22HH
 static int32_t platform_write_LPS22HH(void *handle, uint8_t reg, const uint8_t *bufp,
                               uint16_t len);
 static int32_t platform_read_LPS22HH(void *handle, uint8_t reg, uint8_t *bufp,
                              uint16_t len);
 
+// Humidity / temperature sensor : HTS221
 static int32_t platform_write_HTS221(void *handle, uint8_t reg, const uint8_t *bufp,
                               uint16_t len);
 static int32_t platform_read_HTS221(void *handle, uint8_t reg, uint8_t *bufp,
@@ -133,7 +135,9 @@ float linear_interpolation(lin_t *lin, int16_t x)
          / (lin->x1 - lin->x0);
 }
 
+// Read on the sensor LPS22HH and return the result.
 real_values read_LPS22HH();
+// Read on the sensor HTS221 and return the result.
 real_values read_HTS221();
 
 /* USER CODE END PFP */
