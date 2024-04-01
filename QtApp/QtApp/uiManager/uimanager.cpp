@@ -3,7 +3,7 @@
 UiManager::UiManager(Ui::MainWindow *ui) :
     QObject(nullptr),
     m_ui(ui),
-    m_consoleScrollBarCanMove(false)
+    m_consoleScrollBarCanMove(true)
 {
     // Set the first tab to be display when the app is launch.
     m_ui->tabWidget->setCurrentIndex(0);

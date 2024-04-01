@@ -192,7 +192,7 @@ void MX_BlueNRG_2_Init(void)
   /* USER CODE BEGIN BlueNRG_2_Init_PostTreatment */
 
   //=== HTS221 ===
-  /* Initialize mems driver interface */
+  	  /* Initialize mems driver interface */
   	  PRINT_DBG("Start HTS221 init\r\n");
       dev_ctx_HTS221.write_reg = platform_write_HTS221;
       dev_ctx_HTS221.read_reg = platform_read_HTS221;
@@ -467,7 +467,7 @@ static void User_Process(void)
 	data_p = res_LPS22HH.pressure;
 	data_h = res_HTS221.humidity;
 
-	// We print on the COM port our results.
+	// We print on the port our results.
 	PRINT_DATA("temperature : %.02f\r\n", data_t);
 	PRINT_DATA("pressure : %.02f\r\n", data_p);
 	PRINT_DATA("humidity : %.02f\r\n", data_h);
