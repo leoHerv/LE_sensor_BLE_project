@@ -11,9 +11,9 @@ PlotManager::PlotManager(Ui::MainWindow *ui, QFont font) :
 void PlotManager::addDataPoint(float temperature, float humidity, float pressure, int time)
 {
     // When the reading is finish, we can add the points to the plot.
-    m_dataTemperature->add(QCPGraphData(time, temperature));
-    m_dataHumidity->add(QCPGraphData(time, humidity));
-    m_dataPressure->add(QCPGraphData(time, pressure));
+    m_listDataPointsTemperature->add(QCPGraphData(time, temperature));
+    m_listDataPointsHumidity->add(QCPGraphData(time, humidity));
+    m_listDataPointsPressure->add(QCPGraphData(time, pressure));
 
     // Update the plots.
     replotPlots();
@@ -22,9 +22,9 @@ void PlotManager::addDataPoint(float temperature, float humidity, float pressure
 void PlotManager::clearPlots()
 {
     // We clear all the points.
-    m_dataTemperature->clear();
-    m_dataHumidity->clear();
-    m_dataPressure->clear();
+    m_listDataPointsTemperature->clear();
+    m_listDataPointsHumidity->clear();
+    m_listDataPointsPressure->clear();
 
     // We reset the graphs.
     replotPlots();
@@ -74,9 +74,9 @@ void PlotManager::setupPlot(QSharedPointer<QCPGraphDataContainer>* graphData,
 void PlotManager::initializePlots()
 {
     // Init plot for the Temperature.
-    setupPlot(&m_dataTemperature, m_ui->plotTemperatureWidget, "Température (°C)", "Température", Qt::black);
+    setupPlot(&m_listDataPointsTemperature, m_ui->plotTemperatureWidget, "Température (°C)", "Température", Qt::black);
     // Init plot for the Humidity.
-    setupPlot(&m_dataHumidity, m_ui->plotHumidityWidget, "Humidité (g/m3)", "Humidité", Qt::red);
+    setupPlot(&m_listDataPointsHumidity, m_ui->plotHumidityWidget, "Humidité (g/m3)", "Humidité", Qt::red);
     // Init plot for the Pressure.
-    setupPlot(&m_dataPressure, m_ui->plotPressureWidget, "Pression (hPa)", "Pression", Qt::blue);
+    setupPlot(&m_listDataPointsPressure, m_ui->plotPressureWidget, "Pression (hPa)", "Pression", Qt::blue);
 }

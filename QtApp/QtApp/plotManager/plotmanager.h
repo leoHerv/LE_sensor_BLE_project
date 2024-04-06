@@ -53,15 +53,15 @@ private:
     /**
      * @brief m_dataTemperature All the points for the temperature in the plot.
      */
-    QSharedPointer<QCPGraphDataContainer> m_dataTemperature;
+    QSharedPointer<QCPGraphDataContainer> m_listDataPointsTemperature;
     /**
      * @brief m_dataHumidity All the points for the humidity in the plot.
      */
-    QSharedPointer<QCPGraphDataContainer> m_dataHumidity;
+    QSharedPointer<QCPGraphDataContainer> m_listDataPointsHumidity;
     /**
      * @brief m_dataPressure All the points for pressure in the plot.
      */
-    QSharedPointer<QCPGraphDataContainer> m_dataPressure;
+    QSharedPointer<QCPGraphDataContainer> m_listDataPointsPressure;
 
     /**
      * @brief replotPlots Replot all the plots.
