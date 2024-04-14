@@ -485,7 +485,7 @@ static void User_Process(void)
       /* Update emulated Environmental data */
       //Set_Random_Environmental_Values(&data_t, &data_p);
 
-      Environmental_Update((int32_t)(data_p *100), (int16_t)(data_t * 10));
+      Environmental_Update((int32_t)(data_p *100), (int16_t)(data_t * 10), (int16_t)(data_h * 10));
 
       /* Update emulated Acceleration, Gyroscope and Sensor Fusion data */
       Set_Random_Motion_Values(counter);

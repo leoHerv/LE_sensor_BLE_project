@@ -89,10 +89,12 @@ tBleStatus Add_HWServW2ST_Service(void)
   /* Fill the Environmental BLE Characteristc */
   COPY_ENVIRONMENTAL_W2ST_CHAR_UUID(uuid);
   uuid[14] |= 0x04; /* One Temperature value*/
+  uuid[14] |= 0x08; /* Humidity value*/
   uuid[14] |= 0x10; /* Pressure value*/
+
   BLUENRG_memcpy(&char_uuid.Char_UUID_128, uuid, 16);
   ret =  aci_gatt_add_char(HWServW2STHandle, UUID_TYPE_128, &char_uuid,
-                           2+2+4,
+                           2+2+4+2,
                            CHAR_PROP_NOTIFY|CHAR_PROP_READ,
                            ATTR_PERMISSION_NONE,
                            GATT_NOTIFY_READ_REQ_AND_WAIT_FOR_APPL_RESP,
@@ -261,7 +263,7 @@ void Read_Request_CB(uint16_t handle)
     float data_t, data_p;
     data_t = 27.0 + ((uint64_t)rand()*5)/RAND_MAX; //T sensor emulation
     data_p = 1000.0 + ((uint64_t)rand()*100)/RAND_MAX; //P sensor emulation
-    Environmental_Update((int32_t)(data_p *100), (int16_t)(data_t * 10));
+    Environmental_Update((int32_t)(data_p *100), (int16_t)(data_t * 10), 0);
   }
 
   if(connection_handle !=0)
@@ -274,18 +276,19 @@ void Read_Request_CB(uint16_t handle)
   }
 }
 
-tBleStatus Environmental_Update(int32_t press, int16_t temp)
+tBleStatus Environmental_Update(int32_t press, int16_t temp, int16_t humi)
 {
   tBleStatus ret;
-  uint8_t buff[8];
+  uint8_t buff[10];
   //HOST_TO_LE_16(buff, HAL_GetTick()>>3);
   HOST_TO_LE_16(buff, 0);
 
   HOST_TO_LE_32(buff+2,press);
-  HOST_TO_LE_16(buff+6,temp);
+  HOST_TO_LE_16(buff+6,humi);
+  HOST_TO_LE_16(buff+8,temp);
 
   ret = aci_gatt_update_char_value(HWServW2STHandle, EnvironmentalCharHandle,
-                                   0, 8, buff);
+                                   0, 10, buff);
 
   if (ret != BLE_STATUS_SUCCESS){
     PRINT_DBG("Error while updating TEMP characteristic: 0x%04X\r\n",ret) ;
